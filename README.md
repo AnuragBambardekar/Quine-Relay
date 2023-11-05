@@ -1,6 +1,14 @@
 # Attempting to build a Quine Relay
-
+![Ouroboros](image.png)
 Let's build a Quine Relay
+
+## What is it?
+A **quine** relay is a chain or sequence of programs, where each program in the sequence is a quine in one programming language and generates the source code for the next program in the chain, which is a quine in a different programming language. The output of the final program in the sequence should be the source code of the first program.
+
+**Polyquines** are programs that are quines in multiple programming languages. These are designed to exhibit the self-replicating behavior in more than one language. A polyquine is essentially a quine that can "speak" multiple programming languages. It demonstrates the ability to create self-replicating code in different languages within a single program.
+
+The term "**Ouroboros**" typically refers to a symbol depicting a serpent or dragon eating its own tail, forming a circle. It represents a cyclic or self-referential concept, often related to the idea of something that sustains or perpetuates itself. In programming and computing, "Ouroboros" is sometimes used metaphorically to describe systems or processes that loop or self-reference.
+
 
 ## How to build a quine
 A quine is a program P such that Eval P = P. That is, evaluating the program produces the original program, or at least a textual representation thereof. A quine relay is a sequence of programs, say [P, Q, R] such that
