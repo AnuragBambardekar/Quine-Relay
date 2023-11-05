@@ -42,7 +42,7 @@ for d in data:
 for d in data[boundary:]:
     print(d)
 ```
-
+To confirm, whether you indeed made a Quine, we can use diff (in Linux) tool to check.
 ```cmd
 diff -s simple_quine.py =(python simple_quine.py)
 ```
@@ -90,7 +90,8 @@ val it: string = "ananabay"
 ```
 
 #### Great! Let's now build a quine in F#
-Write the same script, however keeping in mind the syntax differences from Python.
+- Write the same script we wrote earlier in Python, however keeping in mind the syntax differences from Python.
+- Make sure to call your program quine.fsx rather than quine.fs. The F# compiler considers an fs file to be program and an fsx file to be a script; it treats them differently. For our purpose the script is easier to work with.
 
 Then execute the code (Select the code and hit Alt+Enter)
 
@@ -129,6 +130,61 @@ You can check (in Linux) whether you indeed made a Quine.
 diff -s quine.fsx =(dotnet fsi quine.fsx)
 ```
 
+## Building a Quine Generator
+- So far we have seen a pair of quines, **one in python and one in F#**. Each consists of data and logic used to control the printing of said data. 
+- The plan here is to repackage the data and the logic. A single python program will handle the printing logic across all languages. The data representing the various quines will live in in python lists, one per language.
+
+Write the scripts (**gen_quine** and **lang_data**) and execute (code is here: https://codeberg.org/drcabana/quines/src/branch/main/src)
+
+```cmd
+python .\quine_generator.py python> generated_quine.py
+python quine_generator.py java > quine.java
+python quine_generator.py fsharp > generated_quine.fsx
+```
+
+**we can also make a shell script to automate this, but for my convenience I chose not to do that**
+#---- Generate the specified quine and write it to a file
+../src/gen_quine python > quine.py
+
+#---- Execute the quine, store its output as clone
+run_python quine.py > clone.py
+
+#---- Diff the clone against the original
+diff -s quine.py clone.py
+
+
+Commands I used to execute the generated quine and make a clone to compare it: <br>
+```cmd
+python .\generated_quine.py > clone.py
+dotnet fsi .\generated_quine.fsx > clone.fsx
+javac .\quine.java
+java quine > clone.java
+```
+
+Now check difference using diff tool (I used WSL Ubuntu) <br>
+- Open Windows CMD
+- Type `ubuntu`
+```cmd
+anuragb@AnuragBamba98: cd /mnt/c/Users/anura/Documents/VSCode_Workspace/Quine_relays/quine_gen
+```
+
+You might need to change the encoding of `clone.py` to UTF-8 using Notepad++ before running the diff command. <br>
+Although, the code is same and quine is indeed formed, it'd say that the binary files are different.
+```cmd
+diff generated_quine.py clone.py
+```
+
+
+**Troubleshooting:**
+```cmd
+SyntaxError: Non-UTF-8 code starting with '\xff' in file C:\Users\anura\Documents\VSCode_Workspace\Quine_relays\quine_gen\generated_quine.py on line 2, but no encoding declared; see https://python.org/dev/peps/pep-0263/ for details
+```
+
+Open file in Notepad++ and change Encoding of generated quines to UTF-8.
+
+
+
+## Poly-Quine
 
 
 ## References
