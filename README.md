@@ -183,11 +183,89 @@ SyntaxError: Non-UTF-8 code starting with '\xff' in file C:\Users\anura\Document
 Open file in Notepad++ and change Encoding of generated quines to UTF-8.
 
 
+## Poly-Quine/ Quine Relay generator
+- Now the goal is to extend the quine generator so that it can generate quine relays
+- The program will now expect one or more string arguments, selected from *java*,*python*,*fsharp*. A single argument results in a standard quine. It should be OK to repeat arguments.
 
-## Poly-Quine
+- The use-case described in the tutorial is that what if we want to insert some lines/parameters in code (having the same functionality) developed in multiple languages.
 
+- To do this, we can modify the template from earlier, by splitting the list of strings into list of lists of strings.
+
+- At runtime, we can insert the variables/parameters/lines between the 2 or more lists that make up the template.
+
+```cmd
+PS C:\Users\anura\Documents\VSCode_Workspace\Quine_relays\quine_relay_gen> python .\polyquine.py java python fsharp java
+
+public class quine {
+ public static void main(String[] args) {
+  String[] data = {
+ "public class quine {",
+ " public static void main(String[] args) {",
+ "  String[] data = {",
+ "  };",
+ "  int a=14; int b=15; int c=24; int sep=44;",
+ "  char q = (char) 34; char space = (char) 32; char separator = (char) sep;",
+ "  for (int i = a; i < b; i++)",
+ "    System.out.println(data[i]);",
+ "  for (int i = 0; i < data.length; i++)",
+ "    System.out.println(String.valueOf(space) + q + data[i] + q + separator);",
+ "  for (int i = b; i < c; i++)",
+ "    System.out.println(data[i]);",
+ " }",
+ "}",
+ "data = [",
+ "]",
+ "a, b, c, sep = 24, 25, 34, 59",
+ "q, space, separator = chr(34), chr(32), chr(sep)",
+ "for k in range(a,b):",
+ "  print(data[k])",
+ "for d in data:",
+ "  print(space + q + d + q + separator)",
+ "for k in range(b,c):",
+ "  print(data[k])",
+ "let data = [",
+ "]",
+ "let a, b, c, sep = 34, 37, 48, 44",
+ "let q, space, separator = string(char 34), string(char 32), string(char sep)",
+ "for i in a..b-1 do",
+ "   System.Console.WriteLine(data.[i])",
+ "for i in 0..data.Length-1 do",
+ "   System.Console.WriteLine(space + q + data.[i] + q + separator)",
+ "for i in b..c-1 do",
+ "   System.Console.WriteLine(data.[i])",
+ "public class quine {",
+ " public static void main(String[] args) {",
+ "  String[] data = {",
+ "  };",
+ "  int a=0; int b=3; int c=14; int sep=44;",
+ "  char q = (char) 34; char space = (char) 32; char separator = (char) sep;",
+ "  for (int i = a; i < b; i++)",
+ "    System.out.println(data[i]);",
+ "  for (int i = 0; i < data.length; i++)",
+ "    System.out.println(String.valueOf(space) + q + data[i] + q + separator);",
+ "  for (int i = b; i < c; i++)",
+ "    System.out.println(data[i]);",
+ " }",
+ "}",
+  };
+  int a=14; int b=15; int c=24; int sep=44;
+  char q = (char) 34; char space = (char) 32; char separator = (char) sep;
+  for (int i = a; i < b; i++)
+    System.out.println(data[i]);
+  for (int i = 0; i < data.length; i++)
+    System.out.println(String.valueOf(space) + q + data[i] + q + separator);
+  for (int i = b; i < c; i++)
+    System.out.println(data[i]);
+ }
+}
+```
+
+## Prerequisites
+
+- The host needs to have the various languages (Python, fsharp and java) installed
 
 ## References
 - https://drcabana.org/
 - https://drcabana.org/quine/
+- https://codeberg.org/drcabana/polyquine
 - https://learn.microsoft.com/en-us/dotnet/fsharp/get-started/get-started-vscode
