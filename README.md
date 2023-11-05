@@ -184,15 +184,17 @@ Open file in Notepad++ and change Encoding of generated quines to UTF-8.
 
 
 ## Poly-Quine/ Quine Relay generator
+
+A "polyquine generator" is a program that generates quines in multiple programming languages. A quine is a type of self-replicating program that produces its own source code as its output. A polyquine generator takes this concept a step further by creating quines in not just one but multiple programming languages. The goal is to demonstrate the same self-replicating behavior across a variety of programming languages.
+
 - Now the goal is to extend the quine generator so that it can generate quine relays
 - The program will now expect one or more string arguments, selected from *java*,*python*,*fsharp*. A single argument results in a standard quine. It should be OK to repeat arguments.
 
-- The use-case described in the tutorial is that what if we want to insert some lines/parameters in code (having the same functionality) developed in multiple languages.
+- The tutorial talks about modifying the template we used from earlier, by splitting the list of strings into a list of lists of strings.
 
-- To do this, we can modify the template from earlier, by splitting the list of strings into list of lists of strings.
+- At runtime, we can insert the variables/parameters/lines between the 2 or more lists that make up the template, if we wish to.
 
-- At runtime, we can insert the variables/parameters/lines between the 2 or more lists that make up the template.
-
+Executing the code:
 ```cmd
 PS C:\Users\anura\Documents\VSCode_Workspace\Quine_relays\quine_relay_gen> python .\polyquine.py java python fsharp java
 
